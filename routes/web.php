@@ -1,15 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GerechtController;
 
-// Homepage / restaurantpagina
-Route::get('/', [RestaurantController::class, 'index']);
+// ===== AUTH ROUTES =====
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// User pagina
-Route::get('/user', [UserController::class, 'index']);
+// ===== ADMIN (beveiligd met auth) =====
+Route::get('/admin', function () {
+    return view('admin');
+})->middleware('auth');
 
-// Product CRUD routes
-Route::resource('products', ProductController::class);
+// ===== GERECHTEN CRUD =====
+Route::resource('gerechten', GerechtController::class);
+
+// Contact
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+// Homepage
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');

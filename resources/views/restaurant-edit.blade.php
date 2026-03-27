@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Bewerken</title>
+    <title>Restaurant Bewerken</title>
     <style>
         * {
             margin: 0;
@@ -30,7 +30,7 @@
             font-size: 24px;
         }
         
-        .narrator-buttons {
+        .navbar-buttons {
             display: flex;
             gap: 15px;
             align-items: center;
@@ -96,6 +96,18 @@
             box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
         }
         
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .error ul {
+            list-style-position: inside;
+        }
+        
         .btn-group {
             display: flex;
             gap: 10px;
@@ -129,8 +141,8 @@
 </head>
 <body>
     <div class="navbar">
-        <h1>✏️ Product Bewerken</h1>
-        <div class="narrator-buttons">
+        <h1>✏️ Restaurant Bewerken</h1>
+        <div class="navbar-buttons">
             @auth
                 <span>Welkom, {{ Auth::user()->name }}</span>
                 <a href="/admin">📊 Admin</a>
@@ -144,33 +156,48 @@
     
     <div class="container">
         <div class="form-card">
-            <h1>Bewerk Product</h1>
+            <h1>Bewerk Restaurant</h1>
             
-            <form action="{{ route('products.update', $product->id) }}" method="POST">
+            @if($errors->any())
+                <div class="error">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
+            <form action="{{ route('restaurants.update', $restaurant->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 
                 <div class="form-group">
-                    <label for="name">Productnaam *</label>
-                    <input type="text" id="name" name="name" value="{{ $product->name }}" required>
+                    <label for="name">Naam *</label>
+                    <input type="text" id="name" name="name" value="{{ $restaurant->name }}" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="description">Beschrijving</label>
-                    <textarea id="description" name="description" rows="4">{{ $product->description }}</textarea>
+                    <label for="beschrijving">Beschrijving *</label>
+                    <textarea id="beschrijving" name="beschrijving" rows="4" required>{{ $restaurant->beschrijving }}</textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label for="price">Prijs *</label>
-                    <input type="number" id="price" name="price" step="0.01" value="{{ $product->price }}" required>
+                    <label for="prijs">Prijs *</label>
+                    <input type="number" id="prijs" name="prijs" step="0.01" value="{{ $restaurant->prijs }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="img">Afbeeldings URL</label>
+                    <input type="url" id="img" name="img" value="{{ $restaurant->img }}">
                 </div>
                 
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit">💾 Opslaan</button>
-                    <a href="{{ route('products.index') }}" class="btn btn-cancel">Annuleren</a>
+                    <a href="{{ route('restaurants.index') }}" class="btn btn-cancel">Annuleren</a>
                 </div>
             </form>
         </div>
     </div>
 </body>
-</html>
+</html> -->

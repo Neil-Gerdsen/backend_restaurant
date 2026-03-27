@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Bewerken</title>
+    <title>Gerecht Toevoegen</title>
     <style>
         * {
             margin: 0;
@@ -30,7 +30,7 @@
             font-size: 24px;
         }
         
-        .narrator-buttons {
+        .navbar-buttons {
             display: flex;
             gap: 15px;
             align-items: center;
@@ -129,8 +129,8 @@
 </head>
 <body>
     <div class="navbar">
-        <h1>✏️ Product Bewerken</h1>
-        <div class="narrator-buttons">
+        <h1>➕ Gerecht Toevoegen</h1>
+        <div class="navbar-buttons">
             @auth
                 <span>Welkom, {{ Auth::user()->name }}</span>
                 <a href="/admin">📊 Admin</a>
@@ -144,30 +144,34 @@
     
     <div class="container">
         <div class="form-card">
-            <h1>Bewerk Product</h1>
+            <h1>Nieuw Gerecht</h1>
             
-            <form action="{{ route('products.update', $product->id) }}" method="POST">
+            <form action="{{ route('gerechten.store') }}" method="POST">
                 @csrf
-                @method('PUT')
                 
                 <div class="form-group">
-                    <label for="name">Productnaam *</label>
-                    <input type="text" id="name" name="name" value="{{ $product->name }}" required>
+                    <label for="naam">Naam *</label>
+                    <input type="text" id="naam" name="naam" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="description">Beschrijving</label>
-                    <textarea id="description" name="description" rows="4">{{ $product->description }}</textarea>
+                    <label for="beschrijving">Beschrijving *</label>
+                    <textarea id="beschrijving" name="beschrijving" rows="4" required></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label for="price">Prijs *</label>
-                    <input type="number" id="price" name="price" step="0.01" value="{{ $product->price }}" required>
+                    <label for="prijs">Prijs *</label>
+                    <input type="number" id="prijs" name="prijs" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="img">Afbeeldings URL</label>
+                    <input type="url" id="img" name="img">
                 </div>
                 
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit">💾 Opslaan</button>
-                    <a href="{{ route('products.index') }}" class="btn btn-cancel">Annuleren</a>
+                    <a href="{{ route('gerechten.index') }}" class="btn btn-cancel">Annuleren</a>
                 </div>
             </form>
         </div>
