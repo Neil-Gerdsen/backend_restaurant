@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GerechtController;
 
 // ===== AUTH ROUTES =====
@@ -18,9 +19,8 @@ Route::get('/admin', function () {
 Route::resource('gerechten', GerechtController::class);
 
 // Contact
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Homepage
 Route::get('/', function () {

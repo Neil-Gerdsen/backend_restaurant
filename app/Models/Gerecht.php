@@ -8,4 +8,5 @@ class Gerecht extends Model
 {
     protected $table = 'gerechten';
     protected $fillable = ['naam', 'beschrijving', 'prijs', 'img'];
+    public $timestamps = true;
 }

@@ -24,25 +24,25 @@ class GerechtController extends Controller
         return redirect()->route('gerechten.index')->with('success', 'Gerecht aangemaakt!');
     }
 
-    public function show(Gerecht $gerecht)
+    public function show(Gerecht $gerechten)
     {
-        return view('gerechten.show', ['gerecht' => $gerecht]);
+        return view('gerechten.show', ['gerecht' => $gerechten]);
     }
 
-    public function edit(Gerecht $gerecht)
+    public function edit(Gerecht $gerechten)
     {
-        return view('gerechten.edit', ['gerecht' => $gerecht]);
+        return view('gerechten.edit', ['gerecht' => $gerechten]);
     }
 
-    public function update(Request $request, Gerecht $gerecht)
+    public function update(Request $request, Gerecht $gerechten)
     {
-        $gerecht->update($request->all());
+        $gerechten->update($request->all());
         return redirect()->route('gerechten.index')->with('success', 'Gerecht bijgewerkt!');
     }
 
-    public function destroy(Gerecht $gerecht)
+    public function destroy(Gerecht $gerechten)
     {
-        $gerecht->delete();
+        $gerechten->delete();
         return redirect()->route('gerechten.index')->with('success', 'Gerecht verwijderd!');
     }
 }
